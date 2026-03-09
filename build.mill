@@ -1,0 +1,24 @@
+package build
+
+import mill.*
+import mill.scalalib.*
+
+val scala3 = "3.3.7"
+val scalaVersions = Seq("2.12.21", "2.13.18", scala3)
+
+object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryModule](scalaVersions)
+
+trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule {
+  def repositories = Seq(
+    "https://packages.confluent.io/maven/",
+  )
+  
+  def avro4sVersion = Task {
+    if (scalaVersion() == scala3) "5.0.15" else "4.1.2"
+  }
+
+  def compileMvnDeps = Seq(
+    mvn"com.sksamuel.avro4s::avro4s-core:${avro4sVersion()}",
+    mvn"io.confluent:kafka-schema-registry-client:8.1.1",
+  )
+}

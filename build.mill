@@ -1,24 +1,36 @@
 package build
 
 import mill.*
+import mill.javalib.publish.*
 import mill.scalalib.*
 
-val scala3 = "3.3.7"
+val scala3        = "3.3.7"
 val scalaVersions = Seq("2.12.21", "2.13.18", scala3)
 
 object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryModule](scalaVersions)
 
-trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule {
+trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModule {
+  def publishVersion = "0.0.1-SNAPSHOT"
+
   def repositories = Seq(
-    "https://packages.confluent.io/maven/",
+    "https://packages.confluent.io/maven/"
   )
-  
+
   def avro4sVersion = Task {
     if (scalaVersion() == scala3) "5.0.15" else "4.1.2"
   }
 
   def compileMvnDeps = Seq(
     mvn"com.sksamuel.avro4s::avro4s-core:${avro4sVersion()}",
-    mvn"io.confluent:kafka-schema-registry-client:8.1.1",
+    mvn"io.confluent:kafka-schema-registry-client:8.1.1"
+  )
+
+  def pomSettings = PomSettings(
+    description    = "Kafka Serializer/Deserializer/Serde for Avro-encoded messages using avro4s schema derivation and Confluent Schema Registry.",
+    organization   = "io.github.lvitaly",
+    url            = "https://github.com/lvitaly/avro4s-kafka-schema-registry",
+    licenses       = License.`Apache-2.0` :: Nil,
+    versionControl = VersionControl.github("lvitaly", "avro4s-kafka-schema-registry"),
+    developers     = Developer("lvitaly", "Vitalii Lagutin", "https://github.com/lvitaly") :: Nil
   )
 }

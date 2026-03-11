@@ -12,12 +12,12 @@ Kafka `Serializer`, `Deserializer`, and `Serde` implementations for Avro-encoded
 ## Usage
 
 ```scala
-import com.lvitaly.avro4s.kafka.schema.registry.serde.Avro4sSerde
+import io.github.lvitaly.avro4s.kafka.schema.registry.serde
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient
 
 case class MyEvent(id: String, value: Int)
 
-val schemaRegistry = new CachedSchemaRegistryClient("http://localhost:8081", 100)
+val schemaRegistry = new CachedSchemaRegistryClient("http://localhost:8081", 1000)
 
 // Create a Serde for use with Kafka Streams or the Kafka consumer/producer API
 val serde = Avro4sSerde[MyEvent](

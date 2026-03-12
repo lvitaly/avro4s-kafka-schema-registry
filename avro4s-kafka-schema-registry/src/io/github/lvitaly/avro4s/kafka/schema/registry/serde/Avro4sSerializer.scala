@@ -65,3 +65,21 @@ class Avro4sSerializer[T: Encoder: SchemaFor](
     }
 
 }
+
+object Avro4sSerializer {
+
+  /** Factory method to create an [[Avro4sSerializer]] instance with the required implicit parameters.
+    *
+    *  @param schemaRegistry the Schema Registry client to use for schema management
+    *  @param isKey whether this serializer is for message keys (default: `false`)
+    *  @param autoRegisterSchema whether to automatically register the schema if not found (default: `true`)
+    *  @tparam T the type of the messages to serialize, must have an implicit [[com.sksamuel.avro4s.Encoder]] and [[com.sksamuel.avro4s.SchemaFor]]
+    *  @return a new instance of [[Avro4sSerializer]] for the specified type `T`
+    */
+  def apply[T: Encoder: SchemaFor](
+    schemaRegistry    : SchemaRegistryClient,
+    isKey             : Boolean = false,
+    autoRegisterSchema: Boolean = true
+  ): Avro4sSerializer[T] =
+    new Avro4sSerializer[T](schemaRegistry, isKey, autoRegisterSchema)
+}

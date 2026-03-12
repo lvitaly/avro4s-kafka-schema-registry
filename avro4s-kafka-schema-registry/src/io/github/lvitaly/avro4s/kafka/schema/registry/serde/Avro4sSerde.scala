@@ -26,7 +26,7 @@ object Avro4sSerde {
     autoRegisterSchema: Boolean = true
   ): Serde[T] =
     Serdes.serdeFrom(
-      new Avro4sSerializer[T](schemaRegistry, isKey, autoRegisterSchema),
-      new Avro4sDeserializer[T](schemaRegistry)
+      Avro4sSerializer[T](schemaRegistry, isKey, autoRegisterSchema),
+      Avro4sDeserializer[T](schemaRegistry)
     )
 }

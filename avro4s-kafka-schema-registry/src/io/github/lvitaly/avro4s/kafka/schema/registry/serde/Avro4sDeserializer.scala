@@ -52,3 +52,16 @@ class Avro4sDeserializer[T >: Null: Decoder: SchemaFor](schemaRegistry: SchemaRe
     }
 
 }
+
+object Avro4sDeserializer {
+
+  /** Factory method to create an [[Avro4sDeserializer]] for the given type `T`.
+    *
+    * @param schemaRegistry the Schema Registry client to use for schema retrieval
+    * @tparam T the type of the messages to deserialize, must have an implicit [[com.sksamuel.avro4s.Decoder]]
+    *           and [[com.sksamuel.avro4s.SchemaFor]]
+    * @return a new instance of [[Avro4sDeserializer]] for type `T`
+    */
+  def apply[T >: Null: Decoder: SchemaFor](schemaRegistry: SchemaRegistryClient): Avro4sDeserializer[T] =
+    new Avro4sDeserializer[T](schemaRegistry)
+}

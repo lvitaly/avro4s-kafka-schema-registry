@@ -1,4 +1,7 @@
-# avro4s-kafka-schema-registry
+[![Made in Ukraine](https://img.shields.io/badge/made_in-Ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
+
+avro4s-kafka-schema-registry
+---
 
 Kafka `Serializer`, `Deserializer`, and `Serde` implementations for Avro-encoded messages, backed by [avro4s](https://github.com/sksamuel/avro4s) for schema derivation and the [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) for schema management.
 

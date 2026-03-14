@@ -4,15 +4,14 @@ package build
 import mill.*
 import mill.javalib.publish.*
 import mill.scalalib.*
+import mill.util.*
 
 val scala3        = "3.3.7"
 val scalaVersions = Seq("2.12.21", "2.13.18", scala3)
 
 object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryModule](scalaVersions)
 
-trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModule {
-  def publishVersion = "0.0.1-SNAPSHOT"
-
+trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModule with VcsVersionModule {
   def versionScheme = Some(VersionScheme.SemVerSpec)
 
   def jvmVersion = "11" // to build artifacts compatible with Java 11 and later

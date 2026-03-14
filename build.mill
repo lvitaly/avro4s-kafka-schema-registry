@@ -1,3 +1,4 @@
+//| mill-version: 1.1.3
 package build
 
 import mill.*
@@ -11,6 +12,8 @@ object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryMod
 
 trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModule {
   def publishVersion = "0.0.1-SNAPSHOT"
+
+  def jvmVersion = "11" // to build artifacts compatible with Java 11 and later
 
   def repositories = Seq(
     "https://packages.confluent.io/maven/"

@@ -9,5 +9,8 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - run: ./mill __.test
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Compile and Test
+        run: ./mill __.test

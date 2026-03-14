@@ -7,10 +7,17 @@ on:
 
 jobs:
   publish-artifacts:
+    if: ${{ github.repository == 'lvitaly/avro4s-kafka-schema-registry' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - run: ./mill mill.javalib.SonatypeCentralPublishModule/publishAll
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Compile and Test
+        run: ./mill __.test
+
+      - name: Publish to Sonatype Central
+        run: ./mill mill.javalib.SonatypeCentralPublishModule/publishAll
         env:
           MILL_PGP_PASSPHRASE: ${{ secrets.MILL_PGP_PASSPHRASE }}
           MILL_PGP_SECRET_BASE64: ${{ secrets.MILL_PGP_SECRET_BASE64 }}

@@ -41,3 +41,6 @@ hs_err_pid*
 ### Mill build files
 # Reference: https://www.lihaoyi.com/mill/
 out/
+
+### Metals build files
+.metals/

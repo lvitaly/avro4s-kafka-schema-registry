@@ -1,4 +1,6 @@
 [![Made in Ukraine](https://img.shields.io/badge/made_in-Ukraine-ffd700.svg?labelColor=0057b7)](https://stand-with-ukraine.pp.ua)
+[![CI](https://github.com/lvitaly/avro4s-kafka-schema-registry/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lvitaly/avro4s-kafka-schema-registry/actions/workflows/ci.yml)
+[![Sonatype Central](https://maven-badges.sml.io/sonatype-central/io.github.lvitaly/avro4s-kafka-schema-registry_3/badge.svg)](https://maven-badges.sml.io/sonatype-central/io.github.lvitaly/avro4s-kafka-schema-registry_3/)
 
 avro4s-kafka-schema-registry
 ---

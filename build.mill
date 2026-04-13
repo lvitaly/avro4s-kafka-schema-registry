@@ -34,7 +34,15 @@ trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModul
   def compileMvnDeps = dependencies()
 
   object test extends ScalaTests with TestModule.Utest {
-    def mvnDeps = mvn"com.lihaoyi::utest:0.10.0-RC1" +: dependencies()
+    def utestVersion = "0.10.0-RC1"
+    def mvnDeps = dependencies()
+  }
+
+  object integrationTest extends ScalaTests with TestModule.Utest {
+    def utestVersion = test.utestVersion
+    def mvnDeps = dependencies() ++ Seq(
+      mvn"com.dimafeng::testcontainers-scala-kafka:0.44.1"
+    )
   }
 
   def pomSettings = PomSettings(

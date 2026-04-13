@@ -13,8 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Compile and Test
+      - name: Compile
+        run: ./mill __.compile
+
+      - name: Run Unit Test
         run: ./mill __.test
+
+      - name: Run Integration Test
+        run: ./mill --jobs 1 __.integrationTest
 
       - name: Publish to Sonatype Central
         run: ./mill mill.javalib.SonatypeCentralPublishModule/publishAll

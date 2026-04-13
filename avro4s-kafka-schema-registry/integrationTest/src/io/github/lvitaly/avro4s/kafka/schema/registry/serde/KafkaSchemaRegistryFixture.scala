@@ -86,7 +86,7 @@ trait KafkaSchemaRegistryFixture {
 
     if (results.size < n)
       throw new RuntimeException(
-        s"Expected $n records from '$topic' but received ${results.size} within 30 s"
+        s"Expected $n records from '$topic' but received ${results.size} within ${deadlineTimeout.toSeconds} s"
       )
     results.toList
   }

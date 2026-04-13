@@ -35,7 +35,7 @@ trait KafkaSchemaRegistryFixture {
     MultipleContainers(kafkaContainer, schemaRegistryContainer).start()
   }
 
-  private val pullTimeout = Duration.ofMillis(500)
+  private val pollTimeout = Duration.ofMillis(500)
   private val deadlineTimeout = Duration.ofSeconds(30)
 
   lazy val registryClient: CachedSchemaRegistryClient =
@@ -80,7 +80,7 @@ trait KafkaSchemaRegistryFixture {
       consumer.subscribe(Collections.singleton(topic))
       val deadline = System.currentTimeMillis() + deadlineTimeout.toMillis
       while (results.size < n && System.currentTimeMillis() < deadline) {
-        consumer.poll(pullTimeout).forEach(r => results += (r.key() -> r.value()))
+        consumer.poll(pollTimeout).forEach(r => results += (r.key() -> r.value()))
       }
     } finally consumer.close()
 

@@ -1,4 +1,4 @@
-//| mill-version: 1.1.5
+//| mill-version: 1.1.9
 package build
 
 import mill.*
@@ -6,7 +6,7 @@ import mill.javalib.publish.*
 import mill.scalalib.*
 import mill.util.*
 
-val scala3        = "3.3.7"
+val scala3        = "3.3.8"
 val scalaVersions = Seq("2.12.21", "2.13.18", scala3)
 
 object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryModule](scalaVersions)

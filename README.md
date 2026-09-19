@@ -44,13 +44,15 @@ This project uses [Mill](https://mill-build.com).
 
 ## Dependencies
 
-| Dependency | Version |
-|---|---|
-| avro4s (Scala 2.x) | 4.1.2 |
-| avro4s (Scala 3) | 5.0.15 |
-| kafka-schema-registry-client | 8.1.1 |
+Versions compatibility:
 
-The Confluent Maven repository is required:
+| Dependency                   | Scala 2.x | Scala 3.9.x |
+|------------------------------|-----------|-------------|
+| avro4s                       | 4.1.2     | 5.0.15      |
+| kafka-schema-registry-client | 8.1.1     | 8.1.1       |
+| JVM                          | 11+       | 17+         |
+
+The Confluent Maven repository is required for the `kafka-schema-registry-client` artifact:
 
 ```
 https://packages.confluent.io/maven/

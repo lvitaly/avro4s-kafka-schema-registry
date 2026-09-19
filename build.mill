@@ -6,7 +6,7 @@ import mill.javalib.publish.*
 import mill.scalalib.*
 import mill.util.*
 
-val scala3        = "3.3.8"
+val scala3        = "3.9.0"
 val scalaVersions = Seq("2.12.21", "2.13.18", scala3)
 
 object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryModule](scalaVersions)
@@ -14,7 +14,11 @@ object `avro4s-kafka-schema-registry` extends Cross[Avro4sKafkaSchemaRegistryMod
 trait Avro4sKafkaSchemaRegistryModule extends CrossScalaModule with PublishModule with VcsVersionModule {
   def versionScheme = Some(VersionScheme.SemVerSpec)
 
-  def jvmVersion = "11" // to build artifacts compatible with Java 11 and later
+  // to build artifacts compatible with Java 11 or 17 and later (Scala 3.9.x requires Java 17 minimum)
+  // see https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html
+  def jvmVersion = Task {
+    if (scalaVersion() == scala3) "17" else "11"
+  }
 
   def repositories = Seq(
     "https://packages.confluent.io/maven/"
